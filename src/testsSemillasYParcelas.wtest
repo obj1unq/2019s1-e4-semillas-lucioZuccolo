@@ -1,0 +1,42 @@
+import semillas.*
+import parcelas.*
+import INTA.*
+
+
+describe "semillas al viento" {	
+		
+		const menta1 = new Menta (anioObtencionSemilla = 2005 , altura = 100)
+		const menta2 = new Menta (anioObtencionSemilla = 2008 , altura = 30)
+		const hierbabuena1 = new HierbaBuena (anioObtencionSemilla = 2008 , altura = 100)
+		//const soja1 = new Soja (anioObtencionSemilla = 2001, altura = 100)
+		//const quinoa1 = new Quinoa(anioObtencionSemilla = 2010, altura = 60, horasDeSolToleradas = 12)
+		const parcela1 = new Parcelas(ancho = 6, largo = 10, horasDeSol = 6, plantas = [menta1,menta2,hierbabuena1])
+		
+
+//PLANTAS
+test "menta de 1 metro, da semilla y ocupa 3 mts2" {
+	assert.that(menta1.daSemillas())
+	assert.equals(300, menta1.espacioQueOcupa())
+}
+test "menta de 0.3 metros, no da semilla y ocupa 0.9 mts2" {
+	assert.notThat(menta2.daSemillas())
+	assert.that(menta2.espacioQueOcupa() == 90)
+}
+//VARIEDADES
+test "hiervabuena de 1 metro deberia ocupar el doble que una menta de 1 metro"{
+	assert.equals(600, hierbabuena1.espacioQueOcupa())
+}
+
+//PARCELAS
+test "calcular superficie de una Parcela"{
+	assert.equals(60, parcela1.superficie())
+}
+test "calcular cantidadMaxima de una Parcela"{
+	assert.equals(30, parcela1.cantidadMaximaDePlantas())
+}
+test "calcular que tiene complicaciones una Parcela"{
+	assert.notThat(parcela1.tieneComplicaciones(self))
+}
+
+// LLEGUE A HACER ESTA CANTIDAD DE TESTS EN EL TIEMPO DADO
+}
